@@ -1,6 +1,7 @@
 # Personal Portfolio
 
 My personal portfolio website showcasing my projects and skills.
+Try entering ↑↑↓↓←→←→BA for a surprise!
 
 ## Live Demo
 [View Portfolio](https://oyrqaq.github.io)
