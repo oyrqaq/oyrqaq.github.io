@@ -3,500 +3,562 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Y2K Aesthetic Portfolio - Software Engineer, Master's student at Northeastern University Seattle">
-    <meta name="keywords" content="software engineer, portfolio, y2k, web development, mobile development">
-    <meta name="author" content="Aurora Ouyang">
     <title>Aurora Ouyang</title>
     <link rel="icon" type="image/jpg" href="avatar.jpg">
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg: #fafafa;
+            --text: #171717;
+            --text-secondary: #525252;
+            --border: #e5e5e5;
+            --card-bg: #ffffff;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .layout { display: flex; min-height: 100vh; }
+        
+        .sidebar {
+            width: 38%;
+            max-width: 420px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            padding: 64px 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-right: 1px solid var(--border);
+        }
+        
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 24px;
+            object-fit: cover;
+        }
+        
+        .name { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+        .title { font-size: 16px; color: var(--text-secondary); margin-bottom: 24px; }
+        .bio { font-size: 15px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 32px; }
+        
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            background: #ecfdf5;
+            border-radius: 100px;
+            font-size: 13px;
+            color: #059669;
+            margin-bottom: 32px;
+        }
+        
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        
+        .sidebar-nav { display: flex; flex-direction: column; gap: 8px; margin-bottom: 32px; }
+        
+        .sidebar-nav a {
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 8px 0;
+            transition: all 0.2s;
+        }
+        
+        .sidebar-nav a:hover { color: var(--text); transform: translateX(4px); }
+        .sidebar-nav a.active { color: var(--text); font-weight: 500; }
+        
+        .social-links { display: flex; gap: 16px; }
+        .social-link { font-size: 14px; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+        .social-link:hover { color: var(--text); }
+        
+        .main {
+            flex: 1;
+            margin-left: 38%;
+            max-width: calc(100% - 38%);
+            padding: 64px 48px 64px 32px;
+        }
+        
+        section { padding-bottom: 56px; margin-bottom: 56px; border-bottom: 1px solid var(--border); }
+        section:last-of-type { border-bottom: none; margin-bottom: 0; }
+        
+        .section-title {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            margin-bottom: 28px;
+        }
+        
+        .exp-item { display: flex; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--border); }
+        .exp-item:first-of-type { padding-top: 0; }
+        .exp-item:last-child { border-bottom: none; }
+        
+        .exp-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 1px solid var(--border);
+        }
+        
+        .exp-content { flex: 1; }
+        .exp-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; flex-wrap: wrap; gap: 8px; }
+        .exp-company { font-weight: 600; font-size: 15px; }
+        .exp-date { font-size: 13px; color: var(--text-secondary); }
+        .exp-role { font-size: 14px; color: var(--text-secondary); margin-bottom: 8px; }
+        .exp-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+        
+        .project-grid { display: grid; gap: 12px; }
+        
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 24px;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .project-card:hover {
+            border-color: #a3a3a3;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+        }
+        
+        .project-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .project-title { font-weight: 600; font-size: 15px; }
+        .project-arrow { opacity: 0; transform: translateX(-4px); transition: all 0.2s; color: var(--text-secondary); }
+        .project-card:hover .project-arrow { opacity: 1; transform: translateX(0); }
+        .project-desc { font-size: 14px; color: var(--text-secondary); margin-bottom: 12px; line-height: 1.5; }
+        .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+        .tag { font-size: 12px; padding: 4px 10px; background: var(--bg); border-radius: 6px; color: var(--text-secondary); }
+        
+        .skills-category { margin-bottom: 24px; }
+        .skills-category:last-child { margin-bottom: 0; }
+        .skills-label { font-size: 12px; font-weight: 500; color: var(--text-secondary); margin-bottom: 10px; }
+        .skills-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+        .skill { font-size: 13px; padding: 8px 14px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; transition: all 0.2s; }
+        .skill:hover { border-color: var(--text); }
+        
+        .contact-links { display: flex; gap: 12px; flex-wrap: wrap; }
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: var(--text);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .contact-link:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .contact-link.secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
+        .contact-link.secondary:hover { border-color: var(--text); }
+        
+        .mobile-nav { display: none; }
+        
+        @media (max-width: 900px) {
+            .layout { flex-direction: column; }
+            .sidebar {
+                position: relative;
+                width: 100%;
+                max-width: none;
+                height: auto;
+                padding: 48px 24px;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+            }
+            .sidebar-nav { display: none; }
+            .mobile-nav {
+                display: flex;
+                position: fixed;
+                bottom: 24px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(255,255,255,0.9);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border: 1px solid var(--border);
+                border-radius: 100px;
+                padding: 8px 16px;
+                gap: 8px;
+                z-index: 100;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            }
+            .mobile-nav a {
+                font-size: 13px;
+                color: var(--text-secondary);
+                text-decoration: none;
+                padding: 8px 14px;
+                border-radius: 100px;
+                transition: all 0.2s;
+            }
+            .mobile-nav a:hover, .mobile-nav a.active { background: var(--text); color: white; }
+            .main { margin-left: 0; max-width: 100%; padding: 48px 24px 120px; }
+            .name { font-size: 24px; }
+            .bio { font-size: 14px; }
+            .social-links { margin-top: 24px; }
+            .exp-item { flex-direction: column; gap: 12px; }
+            .exp-logo { width: 36px; height: 36px; }
+        }
+        
+        @media (max-width: 480px) {
+            .sidebar { padding: 32px 20px; }
+            .main { padding: 32px 20px 120px; }
+            .exp-header { flex-direction: column; gap: 2px; }
+            .contact-links { flex-direction: column; }
+            .contact-link { justify-content: center; }
+        }
+    </style>
 </head>
 <body>
-    <div class="custom-cursor"></div>
-    <div class="cursor-trail"></div>
-    
-    <div class="floating-elements">
-        <div class="float-element butterfly">🦋</div>
-        <div class="float-element star">✨</div>
-        <div class="float-element heart">💖</div>
-        <div class="float-element cd">💿</div>
-        <div class="float-element flower">🌸</div>
-    </div>
-
-    <header>
-        <nav>
-            <div class="logo-container">
-                <span class="logo-text">AO</span>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="profile">
+                <img src="avatar.jpg" alt="Aurora Ouyang" class="avatar">
+                <h1 class="name">Aurora Ouyang</h1>
+                <p class="title">Software Engineer</p>
+                <p class="bio">MSCSE @ NU, BSCS @ Rose-Hulman. Experience at Block (Square) and Sea-Tac Airport.</p>
+                <div class="status">
+                    <span class="status-dot"></span>
+                    Open to 2026 New Grad or Internship roles
+                </div>
+                
+                <nav class="sidebar-nav">
+                    <a href="#experience" class="active">Experience</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#contact">Contact</a>
+                </nav>
             </div>
-            <ul class="nav-links">
-                <li><a href="#about" class="nav-item">
-                    <span class="nav-icon">👤</span>
-                    <span>About</span>
-                </a></li>
-                <li><a href="#experience" class="nav-item">
-                    <span class="nav-icon">💼</span>
-                    <span>Experience</span>
-                </a></li>
-                <li><a href="#projects" class="nav-item">
-                    <span class="nav-icon">💾</span>
-                    <span>Projects</span>
-                </a></li>
-                <li><a href="#skills" class="nav-item">
-                    <span class="nav-icon">⚡</span>
-                    <span>Skills</span>
-                </a></li>
-                <li><a href="#contact" class="nav-item">
-                    <span class="nav-icon">📧</span>
-                    <span>Contact</span>
-                </a></li>
-            </ul>
-            <div class="mobile-menu-btn">
-                <span></span>
-                <span></span>
-                <span></span>
+            
+            <div class="social-links">
+                <a href="mailto:aurora.ouyang@outlook.com" class="social-link">Email</a>
+                <a href="https://linkedin.com/in/auroraouyang" class="social-link">LinkedIn</a>
+                <a href="https://github.com/oyrqaq" class="social-link">GitHub</a>
             </div>
-        </nav>
-    </header>
-
-    <section class="hero">
-        <div class="hero-background">
-            <div class="grid-overlay"></div>
-            <div class="gradient-orb orb-1"></div>
-            <div class="gradient-orb orb-2"></div>
-            <div class="gradient-orb orb-3"></div>
-        </div>
+        </aside>
         
-        <div class="container">
-            <div class="hero-content">
-                <div class="avatar-container">
-                    <div class="avatar-frame">
-                        <img src="avatar.jpg" alt="Aurora Ouyang" class="avatar-img">
-                    </div>
-                    <div class="status-indicator">
-                        <span class="status-dot"></span>
-                        <span class="status-text">Open to work</span>
-                    </div>
-                </div>
+        <main class="main">
+            <section id="experience">
+                <div class="section-title">Experience</div>
                 
-                <h1 class="hero-title">
-                    <span class="title-line">Aurora Ouyang</span>
-                    <span class="title-decoration">★･ﾟ✧*:･ﾟ✧</span>
-                </h1>
-                
-                <div class="hero-subtitle">
-                    <span class="typing-text">Software Engineer</span>
-                    <span class="cursor">|</span>
-                </div>
-                
-                <p class="hero-description">
-                    ✨ MSCSE @ NU | BSCS @ RHIT✨<br>
-                </p>
-                
-                <div class="cta-buttons">
-                    <a href="https://github.com/oyrqaq" class="btn-y2k btn-primary">
-                        <span class="btn-icon">💿</span>
-                        <span>GitHub</span>
-                        <span class="btn-sparkle">✨</span>
-                    </a>
-                    <a href="#contact" class="btn-y2k btn-secondary">
-                        <span class="btn-icon">💌</span>
-                        <span>Let's Connect</span>
-                        <span class="btn-sparkle">💕</span>
-                    </a>
-                </div>
-                
-                <div class="music-player">
-                    <div class="player-display">♪ Open to 26 New Grad SWE Roles ♪</div>
-                    <div class="player-controls">
-                        <button class="player-btn">◄◄</button>
-                        <button class="player-btn play-btn">▶</button>
-                        <button class="player-btn">►►</button>
+                <div class="exp-item">
+                    <img src="square.png" alt="Block" class="exp-logo">
+                    <div class="exp-content">
+                        <div class="exp-header">
+                            <span class="exp-company">Block (Square)</span>
+                            <span class="exp-date">May — Aug 2025</span>
+                        </div>
+                        <div class="exp-role">Software Engineer Intern, Growth Mobile</div>
+                        <div class="exp-desc">Integrated Google Passkey API into Android POS app, reducing 159.8k monthly auth errors for 10M+ users. Built personalized device recommendation module serving 4M+ merchants. Developed SMLLC registration UI achieving 68.3% adoption.</div>
                     </div>
                 </div>
-                <span span class="title-decoration">Enter ↑↑↓↓←→←→BA for a surprise.</span>
-            </div>
-        </div>
-    </section>
-
-    <div class="container">
-        <section id="about" class="section">
-            <div class="section-header">
-                <h2 class="section-title">
-                    <span class="title-icon">🌟</span>
-                    <span>About Me</span>
-                    <span class="title-icon">🌟</span>
-                </h2>
-                <div class="section-decoration">～☆～</div>
-            </div>
+                
+                <div class="exp-item">
+                    <img src="seatac.png" alt="Port of Seattle" class="exp-logo">
+                    <div class="exp-content">
+                        <div class="exp-header">
+                            <span class="exp-company">Port of Seattle – SeaTac Airport</span>
+                            <span class="exp-date">Sep — Dec 2025</span>
+                        </div>
+                        <div class="exp-role">Software Engineer Intern</div>
+                        <div class="exp-desc">Led 5-person team building conversational AI platform. Architected full-stack system with Flask backend, NLP-to-SQL pipeline (Gemini API), and React/Electron frontend. Reduced data access time from 2 days to under 1 minute.</div>
+                    </div>
+                </div>
+                
+                <div class="exp-item">
+                    <img src="nu.png" alt="Northeastern" class="exp-logo">
+                    <div class="exp-content">
+                        <div class="exp-header">
+                            <span class="exp-company">Northeastern University</span>
+                            <span class="exp-date">Aug 2025 — Present</span>
+                        </div>
+                        <div class="exp-role">Graduate Teaching Assistant</div>
+                        <div class="exp-desc">Mentoring 20+ graduate students in Python data processing, ETL pipelines, and database optimization techniques.</div>
+                    </div>
+                </div>
+                
+                <div class="exp-item">
+                    <img src="pom.png" alt="Quantum AI" class="exp-logo">
+                    <div class="exp-content">
+                        <div class="exp-header">
+                            <span class="exp-company">Quantum AI Financial Agency Corp</span>
+                            <span class="exp-date">Jun — Nov 2023</span>
+                        </div>
+                        <div class="exp-role">Software Development Engineer</div>
+                        <div class="exp-desc">Sole engineer for insurance agency serving 200+ agents. Built Python automation pipeline for contract processing with 100% accuracy and 90% faster processing.</div>
+                    </div>
+                </div>
+                
+                <div class="exp-item">
+                    <img src="chuwa.png" alt="Chuwa" class="exp-logo">
+                    <div class="exp-content">
+                        <div class="exp-header">
+                            <span class="exp-company">Chuwa America Corporation</span>
+                            <span class="exp-date">Oct 2021 — Feb 2023</span>
+                        </div>
+                        <div class="exp-role">Software Engineer</div>
+                        <div class="exp-desc">Built interactive company offical website with React.js and Spring Boot. Optimized database architecture with Redis caching, achieving 40% improvement in server response time.</div>
+                    </div>
+                </div>
+            </section>
             
-            <div class="about-content">
-                <div class="window-container">
-                    <div class="window-header">
-                        <span class="window-title">about_me.txt</span>
-                        <div class="window-controls">
-                            <span class="control-btn minimize">_</span>
-                            <span class="control-btn maximize">□</span>
-                            <span class="control-btn close">×</span>
+            <section id="projects">
+                <div class="section-title">Projects</div>
+                
+                <div class="project-grid">
+                    <a href="https://github.com/oyrqaq" class="project-card" target="_blank">
+                        <div class="project-header">
+                            <span class="project-title">CashAlpha</span>
+                            <span class="project-arrow">→</span>
                         </div>
-                    </div>
-                    <div class="window-body">
-                        <p class="about-text">
-                            <span class="text-highlight">Hello, and welcome!</span> 🌐 I'm a Master's student in Software 
-                            Engineering with a strong passion for building elegant and impactful digital experiences. 
-                            With hands-on experience from my internship at Block (Square) and Sea-Tac Airport, as well 
-                            as full-time work at a startup, I've contributed to building user-centric digital solutions 
-                            that drive real impact.
-                        </p>
-                        <p class="about-text">
-                            I'm now seeking 2026 summer/fall new graduate software engineering positions where I can 
-                            integrate aesthetic design principles with scalable engineering solutions to create intuitive, 
-                            high-quality products.
-                            Let's shape the future of technology—together. ✨ 
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="experience" class="section">
-            <div class="section-header">
-                <h2 class="section-title">
-                    <span class="title-icon">💼</span>
-                    <span>Experience</span>
-                    <span class="title-icon">💼</span>
-                </h2>
-                <div class="section-decoration">～☆～</div>
-            </div>
-            
-            <div class="experience-timeline">
-                <div class="experience-card">
-                    <div class="exp-decoration">✦</div>
-                    <div class="exp-header">
-                        <div class="exp-title">Software Engineer Intern</div>
-                        <div class="exp-company">
-                            <span class="company-icon">🏢</span>
-                            Block (Square) - Growth Mobile
-                        </div>
-                        <div class="exp-date">
-                            <span class="date-icon">📅</span>
-                            Summer 2025
-                        </div>
-                    </div>
-                    <div class="exp-content">
-                        <ul class="exp-list">
-                            <li><span class="list-icon">🔐</span>Implemented Passkey API for non-error authentication on Android Square POS app</li>
-                            <li><span class="list-icon">🚀</span>Built SMLLC registration flow for small business</li>
-                            <li><span class="list-icon">💎</span>Implemented intelligence recommendation systems</li>
-                            <li><span class="list-icon">🤝</span>Collaborated in agile sprints with cross-functional teams</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="experience-card">
-                    <div class="exp-decoration">✦</div>
-                    <div class="exp-header">
-                        <div class="exp-title">Software Engineer Intern</div>
-                        <div class="exp-company">
-                            <span class="company-icon">💼</span>
-                            Port of Seattle - Sea-Tac Airport
-                        </div>
-                        <div class="exp-date">
-                            <span class="date-icon">📅</span>
-                            Fall 2025 - Present
-                        </div>
-                    </div>
-                    <div class="exp-content">
-                        <ul class="exp-list">
-                            <li><span class="list-icon">📚</span>Transformed data set into conversational chatbot with NLP</li>
-                            <li><span class="list-icon">🌱</span>Cleaned data, created database, and integrated it into system using MySQL</li>
-                            <li><span class="list-icon">💡</span>Designed and implemented user-friendly desktop chatbot application using React and Electron</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="experience-card">
-                    <div class="exp-decoration">✦</div>
-                    <div class="exp-header">
-                        <div class="exp-title">Software Engineer</div>
-                        <div class="exp-company">
-                            <span class="company-icon">🏢</span>
-                            Quantum AI Financial Corp
-                        </div>
-                        <div class="exp-date">
-                            <span class="date-icon">📅</span>
-                            Summer 2023 - Fall 2023
-                        </div>
-                    </div>
-                    <div class="exp-content">
-                        <ul class="exp-list">
-                            <li><span class="list-icon">📚</span>Developed automated software solutions using Python</li>
-                            <li><span class="list-icon">🌱</span>Built agent portal system through software development and integration of WordPress/MySQL</li>
-                            <li><span class="list-icon">💡</span>Performed code analysis and software optimization for commission calculations using Python</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="experience-card">
-                    <div class="exp-decoration">✦</div>
-                    <div class="exp-header">
-                        <div class="exp-title">Software Engineer</div>
-                        <div class="exp-company">
-                            <span class="company-icon">🏢</span>
-                            Ryzlink Corp
-                        </div>
-                        <div class="exp-date">
-                            <span class="date-icon">📅</span>
-                            Summer 2021 - Spring 2023
-                        </div>
-                    </div>
-                    <div class="exp-content">
-                        <ul class="exp-list">
-                            <li><span class="list-icon">🔐</span>Built e-commerce web applications using React.js and Node.js frontend with Java Spring Boot backend</li>
-                            <li><span class="list-icon">🚀</span>Maintained company website and client portal</li>
-                            <li><span class="list-icon">💎</span>Optimized database architecture implementing Redis caching and MongoDB aggregation pipelines</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="section">
-            <div class="section-header">
-                <h2 class="section-title">
-                    <span class="title-icon">💾</span>
-                    <span>Featured Projects</span>
-                    <span class="title-icon">💾</span>
-                </h2>
-                <div class="section-decoration">～☆～</div>
-            </div>
-            
-            <div class="projects-grid">
-                <div class="project-card" data-tilt>
-                    <div class="project-content">
-                        <div class="project-icon">🛩️</div>
-                        <h3 class="project-title">Airfield Intelligence</h3>
-                        <p class="project-description">
-                            Natural language interface for Seattle-Tacoma Airport, 
-                            transforming data queries into conversational magic ✨
-                        </p>
-                    </div>
-                    <div class="project-footer">
-                        <div class="project-tags">
+                        <div class="project-desc">Won Block hackathon. AI investment advisor helping Cash App users make smarter stock decisions with ML prediction models and real-time personalized recommendations.</div>
+                        <div class="tags">
                             <span class="tag">Python</span>
+                            <span class="tag">Machine Learning</span>
+                            <span class="tag">OpenAI API</span>
+                        </div>
+                    </a>
+                    
+                    <a href="https://github.com/oyrqaq" class="project-card" target="_blank">
+                        <div class="project-header">
+                            <span class="project-title">Airfield Intelligence</span>
+                            <span class="project-arrow">→</span>
+                        </div>
+                        <div class="project-desc">Natural language interface for Seattle-Tacoma Airport, transforming complex data queries into conversational interactions with NLP-to-SQL pipeline.</div>
+                        <div class="tags">
+                            <span class="tag">Flask</span>
                             <span class="tag">NLP</span>
-                            <span class="tag">SQL</span>
-                            <span class="tag">AI/ML</span>
+                            <span class="tag">React</span>
+                            <span class="tag">Electron</span>
                         </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">
-                                <span>TBA</span>
-                                <span class="link-icon">💿</span>
-                            </a>
+                    </a>
+                    
+                    <a href="https://github.com/oyrqaq/bubble-pokemon-game" class="project-card" target="_blank">
+                        <div class="project-header">
+                            <span class="project-title">Bubble Pokemon Game</span>
+                            <span class="project-arrow">→</span>
                         </div>
-                    </div>
-                </div>
-
-                <div class="project-card" data-tilt>
-                    <div class="project-content">
-                        <div class="project-icon">📱</div>
-                        <h3 class="project-title">CashAlpha</h3>
-                        <p class="project-description">
-                            Next-gen application for Cash App users to get  
-                            their stock alalyzed with AI 💫
-                        </p>
-                    </div>
-                    <div class="project-footer">
-                        <div class="project-tags">
+                        <div class="project-desc">Java-based arcade game inspired by Bubble Bobble. Players defeat Pokemon enemies by trapping them in bubbles across 6 levels with multiple enemy types, power-ups, and high score system.</div>
+                        <div class="tags">
+                            <span class="tag">Java</span>
+                            <span class="tag">Game Dev</span>
+                            <span class="tag">OOP</span>
+                        </div>
+                    </a>
+                    
+                    <a href="https://github.com/oyrqaq/ev3-smart-robot-mqtt-control" class="project-card" target="_blank">
+                        <div class="project-header">
+                            <span class="project-title">EV3 Robot Control System</span>
+                            <span class="project-arrow">→</span>
+                        </div>
+                        <div class="project-desc">Real-time control system for LEGO EV3 robots using MQTT protocol. Features bidirectional communication, motor control, sensor integration (touch, color, infrared, Pixy camera), and autonomous navigation.</div>
+                        <div class="tags">
                             <span class="tag">Python</span>
-                            <span class="tag">NLP</span>
-                            <span class="tag">AI/ML</span>
+                            <span class="tag">MQTT</span>
+                            <span class="tag">Robotics</span>
+                            <span class="tag">IoT</span>
                         </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">
-                                <span>TBA</span>
-                                <span class="link-icon">💿</span>
-                            </a>
+                    </a>
+                    
+                    <a href="https://github.com/oyrqaq/CatLog" class="project-card" target="_blank">
+                        <div class="project-header">
+                            <span class="project-title">CatLog</span>
+                            <span class="project-arrow">→</span>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="project-card" data-tilt>
-                    <div class="project-content">
-                        <div class="project-icon">⚡</div>
-                        <h3 class="project-title">Scheme Compiler</h3>
-                        <p class="project-description">
-                            A compiler for a custom programming language🚀
-                        </p>
-                    </div>
-                    <div class="project-footer">
-                        <div class="project-tags">
+                        <div class="project-desc">JavaFX desktop application for managing cat adoptions. Features role-based access control, real-time inventory management, reservation tracking, with separate interfaces for administrators and customers.</div>
+                        <div class="tags">
+                            <span class="tag">Java</span>
+                            <span class="tag">JavaFX</span>
+                            <span class="tag">MySQL</span>
+                        </div>
+                    </a>
+                    
+                    <a href="https://github.com/oyrqaq" class="project-card" target="_blank">
+                        <div class="project-header">
+                            <span class="project-title">Scheme Compiler</span>
+                            <span class="project-arrow">→</span>
+                        </div>
+                        <div class="project-desc">A complete compiler implementation for a custom programming language based on Scheme.</div>
+                        <div class="tags">
                             <span class="tag">Scheme</span>
+                            <span class="tag">Compilers</span>
                             <span class="tag">PLC</span>
-                            <span class="tag">Turing</span>
                         </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">
-                                <span>TBA</span>
-                                <span class="link-icon">💿</span>
-                            </a>
-                        </div>
-                    </div>
+                    </a>
                 </div>
-            </div>
-        </section>
-
-        <section id="skills" class="section">
-            <div class="section-header">
-                <h2 class="section-title">
-                    <span class="title-icon">⚡</span>
-                    <span>Tech Stack</span>
-                    <span class="title-icon">⚡</span>
-                </h2>
-                <div class="section-decoration">～☆～</div>
-            </div>
+            </section>
             
-            <div class="skills-container">
-                <div class="skill-category">
-                    <div class="category-header">
-                        <span class="category-icon">💻</span>
-                        <h3>Languages</h3>
-                    </div>
-                    <div class="skill-items">
-                        <div class="skill-item" data-skill="Python">Python</div>
-                        <div class="skill-item" data-skill="JavaScript">JavaScript</div>
-                        <div class="skill-item" data-skill="TypeScript">TypeScript</div>
-                        <div class="skill-item" data-skill="Java">Java</div>
-                        <div class="skill-item" data-skill="SQL">SQL</div>
-                        <div class="skill-item" data-skill="C++">C/C++</div>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <div class="category-header">
-                        <span class="category-icon">🎨</span>
-                        <h3>Frontend</h3>
-                    </div>
-                    <div class="skill-items">
-                        <div class="skill-item" data-skill="React">React</div>
-                        <div class="skill-item" data-skill="RESTAPI">REST API</div>
-                        <div class="skill-item" data-skill="Next.js">Next.js</div>
-                        <div class="skill-item" data-skill="Vue.js">Vue.js</div>
-                        <div class="skill-item" data-skill="WordPress">WordPress</div>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <div class="category-header">
-                        <span class="category-icon">⚙️</span>
-                        <h3>Backend & Data</h3>
-                    </div>
-                    <div class="skill-items">
-                        <div class="skill-item" data-skill="Node.js">Node.js</div>
-                        <div class="skill-item" data-skill="Django">Django</div>
-                        <div class="skill-item" data-skill="PostgreSQL">PostgreSQL</div>
-                        <div class="skill-item" data-skill="MongoDB">MongoDB</div>
-                        <div class="skill-item" data-skill="GraphQL">GraphQL</div>
-                        <div class="skill-item" data-skill="Redis">Redis</div>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <div class="category-header">
-                        <span class="category-icon">🛠️</span>
-                        <h3>Tools & Cloud</h3>
-                    </div>
-                    <div class="skill-items">
-                        <div class="skill-item" data-skill="Docker">Docker</div>
-                        <div class="skill-item" data-skill="K8s">Kubernetes</div>
-                        <div class="skill-item" data-skill="AWS">AWS</div>
-                        <div class="skill-item" data-skill="CI/CD">CI/CD</div>
-                        <div class="skill-item" data-skill="Git">Git</div>
-                        <div class="skill-item" data-skill="Linux">Linux</div>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <div class="category-header">
-                        <span class="category-icon">💼</span>
-                        <h3>Development Practices</h3>
-                    </div>
-                    <div class="skill-items">
-                        <div class="skill-item" data-skill="Agile/Scrum">Agile/Scrum</div>
-                        <div class="skill-item" data-skill="Git">Git</div>
-                        <div class="skill-item" data-skill="Jira">Jira</div>
-                        <div class="skill-item" data-skill="Unit Testing">Unit Testing</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="section">
-            <div class="section-header">
-                <h2 class="section-title">
-                    <span class="title-icon">💌</span>
-                    <span>Get In Touch</span>
-                    <span class="title-icon">💌</span>
-                </h2>
-                <div class="section-decoration">～☆～</div>
-            </div>
-            
-            <div class="contact-container">
-                <p class="contact-intro">
-                    ✨ Let's connect! ✨
-                </p>
+            <section id="skills">
+                <div class="section-title">Skills</div>
                 
-                <div class="contact-cards">
-                    <a href="mailto:aurora.ouyang@outlook.com" class="contact-card">
-                        <div class="contact-icon">📧</div>
-                        <div class="contact-label">Email</div>
-                        <div class="contact-value">aurora.ouyang@outlook.com</div>
-                    </a>
-                    
-                    <a href="https://linkedin.com/in/auroraouyang" class="contact-card">
-                        <div class="contact-icon">💼</div>
-                        <div class="contact-label">LinkedIn</div>
-                        <div class="contact-value">Connect with me</div>
-                    </a>
-                    
-                    <a href="https://github.com/oyrqaq" class="contact-card">
-                        <div class="contact-icon">💿</div>
-                        <div class="contact-label">GitHub</div>
-                        <div class="contact-value">Check my work</div>
-                    </a>
+                <div class="skills-category">
+                    <div class="skills-label">Languages</div>
+                    <div class="skills-grid">
+                        <span class="skill">Java</span>
+                        <span class="skill">Kotlin</span>
+                        <span class="skill">Python</span>
+                        <span class="skill">TypeScript</span>
+                        <span class="skill">JavaScript</span>
+                        <span class="skill">SQL</span>
+                        <span class="skill">C/C++</span>
+                        <span class="skill">C#</span>
+                        <span class="skill">Swift</span>
+                    </div>
                 </div>
                 
-                <div class="guestbook">
-                    <div class="guestbook-header">
-                        <span class="guestbook-title">
-                            <span>📝</span>
-                            <span>guestbook.txt</span>
-                        </span>
-                        <div class="guestbook-controls">
-                            <span class="control-btn minimize">_</span>
-                            <span class="control-btn maximize">□</span>
-                            <span class="control-btn close">×</span>
-                        </div>
-                    </div>
-                    <div class="guestbook-content">
-                        <textarea placeholder="Leave me a message... ✨" class="guestbook-input"></textarea>
-                        <button class="guestbook-btn">
-                            <span>Sign</span>
-                        </button>
+                <div class="skills-category">
+                    <div class="skills-label">Full-Stack & Mobile</div>
+                    <div class="skills-grid">
+                        <span class="skill">React.js</span>
+                        <span class="skill">Node.js</span>
+                        <span class="skill">Spring Boot</span>
+                        <span class="skill">Flask</span>
+                        <span class="skill">Android SDK</span>
+                        <span class="skill">Jetpack Compose</span>
+                        <span class="skill">REST APIs</span>
+                        <span class="skill">Electron</span>
                     </div>
                 </div>
-            </div>
-        </section>
+                
+                <div class="skills-category">
+                    <div class="skills-label">AI/ML & Data</div>
+                    <div class="skills-grid">
+                        <span class="skill">Machine Learning</span>
+                        <span class="skill">NLP</span>
+                        <span class="skill">OpenAI API</span>
+                        <span class="skill">Gemini API</span>
+                        <span class="skill">Pandas</span>
+                        <span class="skill">NumPy</span>
+                        <span class="skill">ETL</span>
+                        <span class="skill">Data Visualization</span>
+                    </div>
+                </div>
+                
+                <div class="skills-category">
+                    <div class="skills-label">Infrastructure</div>
+                    <div class="skills-grid">
+                        <span class="skill">MySQL</span>
+                        <span class="skill">PostgreSQL</span>
+                        <span class="skill">MongoDB</span>
+                        <span class="skill">Redis</span>
+                        <span class="skill">AWS (EC2/S3)</span>
+                        <span class="skill">Docker</span>
+                        <span class="skill">Kubernetes</span>
+                        <span class="skill">CI/CD</span>
+                    </div>
+                </div>
+                
+                <div class="skills-category">
+                    <div class="skills-label">Development Practices</div>
+                    <div class="skills-grid">
+                        <span class="skill">Agile/Scrum</span>
+                        <span class="skill">Git</span>
+                        <span class="skill">DevOps</span>
+                        <span class="skill">Jira</span>
+                        <span class="skill">Unit Testing</span>
+                        <span class="skill">Code Review</span>
+                        <span class="skill">System Design</span>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="contact">
+                <div class="section-title">Get in touch</div>
+                <div class="contact-links">
+                    <a href="mailto:aurora.ouyang@outlook.com" class="contact-link">Email me</a>
+                    <a href="https://linkedin.com/in/auroraouyang" class="contact-link secondary">LinkedIn</a>
+                    <a href="https://github.com/oyrqaq" class="contact-link secondary">GitHub</a>
+                </div>
+            </section>
+        </main>
     </div>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-text">Page 1</div>
-            <div class="footer-text">Made by Aurora Ouyang © 2025</div>
-            <div class="footer-text">100%</div>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+    
+    <nav class="mobile-nav">
+        <a href="#experience" class="active">Exp</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(a.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    document.querySelectorAll('.sidebar-nav a, .mobile-nav a').forEach(link => link.classList.remove('active'));
+                    document.querySelectorAll(`a[href="${a.getAttribute('href')}"]`).forEach(link => link.classList.add('active'));
+                }
+            });
+        });
+        
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.sidebar-nav a, .mobile-nav a');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('section, .exp-item, .project-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(16px)';
+            el.style.transition = 'all 0.5s ease';
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>

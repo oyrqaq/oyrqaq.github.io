@@ -1,7 +1,6 @@
 # Personal Portfolio
 
 My personal portfolio website showcasing my projects and skills.
-Try entering ↑↑↓↓←→←→BA for a surprise!
 
 ## Live Demo
 [View Portfolio](https://oyrqaq.github.io)
@@ -12,7 +11,7 @@ Try entering ↑↑↓↓←→←→BA for a surprise!
 MSCS @ Northeastern University  
 BSCS @ Rose-Hulman Institute of Technology  
 
-Seeking 2026 New Grad SWE positions.
+Seeking 2026 New Grad or INtern SWE positions.
 
 ## Experience
 
