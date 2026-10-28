@@ -155,6 +155,7 @@
         .project-title { font-weight: 600; font-size: 15px; }
         .project-arrow { opacity: 0; transform: translateX(-4px); transition: all 0.2s; color: var(--text-secondary); }
         .project-card:hover .project-arrow { opacity: 1; transform: translateX(0); }
+        .project-demo { width: 100%; border-radius: 8px; margin-bottom: 14px; display: block; }
         .project-desc { font-size: 14px; color: var(--text-secondary); margin-bottom: 12px; line-height: 1.5; }
         .tags { display: flex; gap: 6px; flex-wrap: wrap; }
         .tag { font-size: 12px; padding: 4px 10px; background: var(--bg); border-radius: 6px; color: var(--text-secondary); }
@@ -250,7 +251,7 @@
                 <p class="bio">MSCSE @ NU, BSCS @ Rose-Hulman. Experience at Block (Square) and Sea-Tac Airport.</p>
                 <div class="status">
                     <span class="status-dot"></span>
-                    Open to 2026 New Grad or Internship roles
+                    Open to 2027 New Grad roles
                 </div>
                 
                 <nav class="sidebar-nav">
@@ -328,7 +329,7 @@
                             <span class="exp-date">Oct 2021 — Feb 2023</span>
                         </div>
                         <div class="exp-role">Software Engineer</div>
-                        <div class="exp-desc">Built interactive company offical website with React.js and Spring Boot. Optimized database architecture with Redis caching, achieving 40% improvement in server response time.</div>
+                        <div class="exp-desc">Built interactive company official website with React.js and Spring Boot. Optimized database architecture with Redis caching, achieving 40% improvement in server response time.</div>
                     </div>
                 </div>
             </section>
@@ -337,6 +338,35 @@
                 <div class="section-title">Projects</div>
                 
                 <div class="project-grid">
+                    <a href="https://github.com/oyrqaq/kiwithyou" class="project-card" target="_blank">
+                        <div class="project-header">
+                            <span class="project-title">Kiwi with You</span>
+                            <span class="project-arrow">→</span>
+                        </div>
+                        <video src="kiwi-demo.mp4" class="project-demo" autoplay loop muted playsinline preload="metadata" aria-label="Kiwi browser extension demo"></video>
+                        <div class="project-desc">A hand-painted pet that lives at the bottom of your browser: feed it, bathe it, play with it. Also ships as a macOS desktop pet that turns any photo into a chibi companion, with offline chat lines or optional Claude-powered conversations.</div>
+                        <div class="tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Chrome Extension</span>
+                            <span class="tag">macOS</span>
+                            <span class="tag">Claude API</span>
+                        </div>
+                    </a>
+
+                    <a href="https://github.com/oyrqaq/ace-arena" class="project-card" target="_blank">
+                        <div class="project-header">
+                            <span class="project-title">ACE Arena</span>
+                            <span class="project-arrow">→</span>
+                        </div>
+                        <div class="project-desc">Real-time multiplayer game platform with matchmaking, play-vs-AI mode, live leaderboard and activity log, built on WebSockets.</div>
+                        <div class="tags">
+                            <span class="tag">React</span>
+                            <span class="tag">Node.js</span>
+                            <span class="tag">Socket.IO</span>
+                            <span class="tag">TypeScript</span>
+                        </div>
+                    </a>
+
                     <a href="https://github.com/oyrqaq" class="project-card" target="_blank">
                         <div class="project-header">
                             <span class="project-title">CashAlpha</span>
@@ -350,7 +380,7 @@
                         </div>
                     </a>
                     
-                    <a href="https://github.com/oyrqaq" class="project-card" target="_blank">
+                    <a href="https://github.com/oyrqaq/AIport" class="project-card" target="_blank">
                         <div class="project-header">
                             <span class="project-title">Airfield Intelligence</span>
                             <span class="project-arrow">→</span>
