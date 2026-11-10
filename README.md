@@ -11,7 +11,7 @@ My personal portfolio website showcasing my projects and skills.
 MSCS @ Northeastern University  
 BSCS @ Rose-Hulman Institute of Technology  
 
-Seeking 2026 New Grad or INtern SWE positions.
+Looking for 2027 full-time SWE roles.
 
 ## Experience
 
