@@ -8,8 +8,8 @@ My personal portfolio website showcasing my projects and skills.
 ## About
 
 **Aurora Ouyang**  
-MSCS @ Northeastern University  
-BSCS @ Rose-Hulman Institute of Technology  
+MSCS @ Northeastern University in Seattle, WA  
+BSCS @ Rose-Hulman Institute of Technology in Terre Haute, IN  
 
 Looking for 2027 full-time SWE roles.
 
