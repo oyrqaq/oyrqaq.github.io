@@ -16,7 +16,7 @@ Looking for 2027 full-time SWE roles.
 ## Experience
 
 - **Port of Seattle** - SWE Intern, Data & NLP
-- **Block (Square)** - SWE Intern, Growth Mobile Team
+- **Block, Inc. (Square)** - SWE Intern, Growth Mobile Team
 - **Quantum AI Financial** - Software Engineer
 - **Ryzlink Corp** - Software Engineer
 
